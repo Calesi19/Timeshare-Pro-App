@@ -1,5 +1,6 @@
 import './App.css'
 import SideBar from './components/SideBar'
+import HotelProjectionPage from './pages/HotelProjections'
 
 function App() {
   
@@ -8,9 +9,11 @@ function App() {
       
       <SideBar />
       
-      <div className="flex flex-col ">
+      
+      <HotelProjectionPage />
+      
 
-      </div>
+      
       
 
     </div>

@@ -5,14 +5,14 @@ import BedIcon from '../assets/bed.svg';
 import PizzaIcon from '../assets/pizza.svg';
 import WriteIcon from '../assets/write.svg';
 import CalculatorIcon from '../assets/calculator.svg';
-import CurrencyIcon from '../assets/currency.svg';
+import CurrencyIcon from '../assets/money.svg';
 import InformationIcon from '../assets/information.svg';
 import TranslateIcon from '../assets/translate.svg';
 import ReloadIcon from '../assets/reload.svg';
 
 function SideBar() {
     return (
-        <div className="bg-white min-h-screen w-[300px] p-4 flex flex-col justify-between">
+        <div className="bg-white min-h-screen w-[350px] p-4 flex flex-col justify-between">
             
             
             <div>
