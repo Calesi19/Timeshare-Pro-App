@@ -4,7 +4,7 @@ function HotelProjectionPage() {
 
             
             
-            <div className="w-full h-1/3 p-10 bg-gradient-to-br from-[#38BDF8] to-blue-500 rounded-xl shadow-lg font-bold text-5xl text-white flex justify-between items-center">
+            <div className="w-full h-1/3 p-10 bg-gradient-to-br from-[rgb(56,189,248)] to-blue-500 rounded-xl shadow-lg font-bold text-5xl text-white flex justify-between items-center">
 
                 <div>
                     Hello
