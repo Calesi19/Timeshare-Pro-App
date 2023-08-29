@@ -66,15 +66,18 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
     if (buttonText == "÷" || buttonText == "×" || buttonText == "-" || buttonText == "+" || buttonText == "=") {
       return Expanded(
         flex: flex,
-        child: ElevatedButton(
-          onPressed: () => onPressed(buttonText),
-          child: Text(buttonText, style: TextStyle(fontSize: 20.0, color: Colors.black)),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue[50],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () => onPressed(buttonText),
+            child: Text(buttonText, style: TextStyle(fontSize: 20.0, color: Colors.black)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue[50],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              padding: EdgeInsets.all(24.0),
             ),
-            padding: EdgeInsets.all(24.0),
           ),
         ),
       );
