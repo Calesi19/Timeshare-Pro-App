@@ -4,12 +4,12 @@ class DefaultProposal {
   DefaultProposal() {
     int years_financed = 10;
     double dp = 10;
-    double annual_rate = 17;
+    double annual_rate = 17.99;
 
     double? purchase_price;
     double? downpayment;
     double? closing_cost;
-    double? exchange_dues;
+    double? exchange_dues = 109;
     double? total_dp;
 
     double? amount_financed;
@@ -18,4 +18,9 @@ class DefaultProposal {
     String years = 'Whole';
     String mortgage_protection = 'Single';
   }
+
+
+  
 }
+
+

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:timesharepro/pages/projections_phone_view.dart';
+import 'package:timesharepro/pages/proposal_phone_view.dart';
+import 'package:timesharepro/pages/calculator_phone_view.dart';
 
 class DrawerSeperator extends StatelessWidget {
   const DrawerSeperator({super.key, text});
@@ -66,8 +69,11 @@ class MyDrawer extends StatelessWidget {
             title: Text('Hotel Cost Projection'),
             
             onTap: () {
-              // Update the state of the app.
-              Navigator.pop(context); // Close the drawer
+              
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProjectionPage()),
+              );
             },
 
             //  Round the corners of the tile
@@ -107,7 +113,10 @@ class MyDrawer extends StatelessWidget {
             title: Text('Proposal'),
             onTap: () {
               // Update the state of the app.
-              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProposalPage()),
+              );
             },
           ),
 
@@ -122,7 +131,10 @@ class MyDrawer extends StatelessWidget {
             title: Text('Calculator'),
             onTap: () {
               // Update the state of the app.
-              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CalculatorHomePage()),
+              );
             },
           ),
 
