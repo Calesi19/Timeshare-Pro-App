@@ -17,6 +17,14 @@ class DefaultProposal {
 
     String years = 'Whole';
     String mortgage_protection = 'Single';
+
+
+    void calculate() {
+      
+    }
+
+
+
   }
 
 

@@ -1,4 +1,9 @@
 
+import os 
+import math
+
+os.system('clear')
+
 
 class DefaultProposal:
     def __init__(self):
@@ -28,16 +33,20 @@ class DefaultProposal:
         self.amount_financed = self.purchase_price - self.total_dp
         self.monthly = self.amount_financed * self.annual_rate / 100 / 12
 
-        print(f'Purchase Price {self.purchase_price}')
-        print(f'Downpayment {self.downpayment}')
-        print(f'Closing Cost {self.closing_cost}')
-        print(f'Total DP {self.total_dp}')
-        print(f'Monthly {self.monthly}')
-        print(f'Amount Financed {self.amount_financed}')
+        print(f'Purchase Price {math.ceil(self.purchase_price)}')
+        print(f'Downpayment {math.ceil(self.downpayment)}')
+        print(f'Closing Cost {math.ceil(self.closing_cost)}')
+        print(f'Exchange Dues {math.ceil(self.exchange_dues)}')
+        print(f'Total DP {math.ceil(self.total_dp)}')
+        print(f'Monthly {math.ceil(self.monthly)}')
+        print(f'Amount Financed {math.ceil(self.amount_financed)}')
 
 
 proposal = DefaultProposal()
+
+print()
 proposal.calculate(12345)
+print()
 
 
 

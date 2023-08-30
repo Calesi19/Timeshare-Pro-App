@@ -26,7 +26,7 @@ class ProjectionPage extends StatelessWidget {
               children: <Widget>[
 
                 Container(
-                    height: 100,
+                    height: 125,
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -43,7 +43,7 @@ class ProjectionPage extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              'Amount Financed\n\$35,543',
+                              'Spent in the next 10 years',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -56,17 +56,121 @@ class ProjectionPage extends StatelessWidget {
                           verticalDirection: VerticalDirection.up,
                           children: [
                             Text(
-                              '\$35,543\nMonthly Payment',
+                              '\$35,543',
                               textAlign: TextAlign.end,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16),
+                                  fontSize: 32),
                             )
                           ],
                         )
                       ],
                     )),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [Text("Nights", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  Spacer(),
+                  TextField(
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(8),
+                constraints: BoxConstraints(maxWidth: 150),
+                
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10), gapPadding: 20),
+              ),
+            ),
+              ]),
+
+              SizedBox(height: 20,),
+
+                Row(
+                  children: [
+                    Text("Cost Per Night", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Spacer(),
+                    TextField(
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(8),
+                constraints: BoxConstraints(maxWidth: 150),
+                prefix: Text("\$"),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10), gapPadding: 20),
+              ),
+            ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(children: [
+                  Text("Years", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Spacer(),
+                  TextField(
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(8),
+                constraints: BoxConstraints(maxWidth: 150),
+                
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10), gapPadding: 20),
+              ),
+            ),
+
+                ],),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Text("Inflation", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Spacer(), TextField(
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(8),
+                constraints: BoxConstraints(maxWidth: 150),
+                prefix: Text("%"),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10), gapPadding: 20),
+              ),
+            ),
+                  ],
+                ),
+
+                SizedBox(height: 20),
+                
+                ElevatedButton(
+                  onPressed: () {}, 
+                  
+                  style: ButtonStyle(
+                  // Button Color
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromRGBO(244, 244, 244, 1)),
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                          EdgeInsets.all(20)),
+                      
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              
+                              )
+                              
+                  
+                  ),
+                child: Text("Calculate", style: TextStyle(color: Colors.black)),
+                )
+
+
+
+
 
 
 

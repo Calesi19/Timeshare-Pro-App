@@ -34,6 +34,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
   }
 
   void _onClearPressed() {
+    print("Clear button pressed");
     setState(() {
       _output = "0";
     });
@@ -60,7 +61,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
   }
 
   Widget _buildButton(String buttonText, Function onPressed, {int flex = 1}) {
-
+    bool acceptsArgument = onPressed is Function(String);
     // If button text is for operation, return a button with a different style
 
     if (buttonText == "÷" || buttonText == "×" || buttonText == "-" || buttonText == "+" || buttonText == "=") {
