@@ -53,7 +53,6 @@ class ProposalPage extends StatefulWidget {
   _ProposalPageState createState() => _ProposalPageState();
 }
 
-
 void showErrorDialog(BuildContext context, String errorMessage) {
   showDialog(
     context: context,
@@ -74,9 +73,9 @@ void showErrorDialog(BuildContext context, String errorMessage) {
   );
 }
 
-
-
 class _ProposalPageState extends State<ProposalPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   TextEditingController _purchasePriceController = TextEditingController();
   TextEditingController _downPaymentController = TextEditingController();
   TextEditingController _closingCostController = TextEditingController();
@@ -88,6 +87,11 @@ class _ProposalPageState extends State<ProposalPage> {
       TextEditingController(text: '10');
   TextEditingController _dpPercentController =
       TextEditingController(text: '10');
+
+  FocusNode _purchasePriceFocus = FocusNode();
+  FocusNode _downPaymentFocus = FocusNode();
+  FocusNode _yearsFinancedFocus = FocusNode();
+  FocusNode _annualRateFocus = FocusNode();
 
   double amountFinanced = 0.0;
   double monthlyPayment = 0.0;
@@ -110,8 +114,6 @@ class _ProposalPageState extends State<ProposalPage> {
     double dp_percent = 0.0;
     double annual_rate = 0.0;
     double years_financed = 0.0;
-
-    
 
     try {
       purchase_price = double.parse(_purchasePriceController.text);
@@ -165,7 +167,28 @@ class _ProposalPageState extends State<ProposalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+
+            
+
+
+            if (_scaffoldKey.currentState!.isDrawerOpen) {
+              Navigator.of(context).pop();
+            } else {
+              FocusScope.of(context).unfocus(); // Unfocus any active TextField
+              _scaffoldKey.currentState!.openDrawer();
+            }
+
+            final FocusScopeNode currentScope = FocusScope.of(context);
+        if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
+          },
+        ),
         title: Text(
           'Proposal',
           style: TextStyle(color: Colors.black),
@@ -177,287 +200,295 @@ class _ProposalPageState extends State<ProposalPage> {
         iconTheme: IconThemeData(color: Colors.black),
       ),
       drawer: MyDrawer(), // This is where you add the drawer
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child: Row(
+      body: GestureDetector(
+        onTap: () => {
+          FocusScope.of(context).unfocus(),
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Annual \n% Rate'),
+                            TextField(
+                              controller: _annualRateController,
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
+                              textAlign: TextAlign.right,
+                              decoration: InputDecoration(
+                                constraints: BoxConstraints(maxWidth: 100),
+                                contentPadding: EdgeInsets.all(8),
+                                prefix: Text("\%"),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('\nDP %'),
+                            TextField(
+                              controller: _dpPercentController,
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
+                              textAlign: TextAlign.right,
+                              decoration: InputDecoration(
+                                constraints: BoxConstraints(
+                                  maxWidth: 100,
+                                ),
+                                contentPadding: EdgeInsets.all(8),
+                                prefix: Text("\%"),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    gapPadding: 10),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Years \nFinanced'),
+                            TextField(
+                              controller: _yearsFinancedController,
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
+                              textAlign: TextAlign.right,
+                              decoration: InputDecoration(
+                                constraints: BoxConstraints(maxWidth: 100),
+                                contentPadding: EdgeInsets.all(8),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    gapPadding: 10),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+
+                  // Center Area
+
+                  Column(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text('Annual \n% Rate'),
+                          Text("Purchase Price",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                          Spacer(),
                           TextField(
-                            controller: _annualRateController,
+                            controller: _purchasePriceController,
                             keyboardType:
                                 TextInputType.numberWithOptions(decimal: true),
                             textAlign: TextAlign.right,
                             decoration: InputDecoration(
-                              constraints: BoxConstraints(maxWidth: 100),
                               contentPadding: EdgeInsets.all(8),
-                              prefix: Text("\%"),
+                              constraints: BoxConstraints(maxWidth: 150),
+                              prefix: Text("\$"),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  gapPadding: 20),
                             ),
                           ),
                         ],
                       ),
-                      Spacer(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      SizedBox(height: 10),
+                      Row(
                         children: [
-                          Text('\nDP %'),
+                          Text("Down Payment",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                          Spacer(),
                           TextField(
-                            controller: _dpPercentController,
+                            controller: _downPaymentController,
+                            enabled: false,
                             keyboardType:
                                 TextInputType.numberWithOptions(decimal: true),
                             textAlign: TextAlign.right,
                             decoration: InputDecoration(
-                              constraints: BoxConstraints(
-                                maxWidth: 100,
-                              ),
                               contentPadding: EdgeInsets.all(8),
-                              prefix: Text("\%"),
+                              constraints: BoxConstraints(maxWidth: 150),
+                              prefix: Text("\$"),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  gapPadding: 10),
+                                  gapPadding: 20),
                             ),
                           ),
                         ],
                       ),
-                      Spacer(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      SizedBox(height: 10),
+                      Row(
                         children: [
-                          Text('Years \nFinanced'),
+                          Text("Closing Cost",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                          Spacer(),
                           TextField(
-                            controller: _yearsFinancedController,
+                            controller: _closingCostController,
+                            enabled: false,
                             keyboardType:
                                 TextInputType.numberWithOptions(decimal: true),
                             textAlign: TextAlign.right,
                             decoration: InputDecoration(
-                              constraints: BoxConstraints(maxWidth: 100),
                               contentPadding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(maxWidth: 150),
+                              prefix: Text("\$"),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  gapPadding: 10),
+                                  gapPadding: 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text("Exchange Company\nDues",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                          Spacer(),
+                          TextField(
+                            controller: _exchangeDuesController,
+                            enabled: false,
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            textAlign: TextAlign.right,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(maxWidth: 150),
+                              prefix: Text("\$"),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  gapPadding: 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text("Total Down\nPayment Due",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                          Spacer(),
+                          TextField(
+                            controller: _totalDownPaymentController,
+                            enabled: false,
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            textAlign: TextAlign.right,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(maxWidth: 150),
+                              prefix: Text("\$"),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  gapPadding: 20),
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
-                ),
-                SizedBox(height: 20),
 
-                // Center Area
+                  // Bottom Area
+                  SizedBox(height: 20),
 
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("Purchase Price",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
-                        Spacer(),
-                        TextField(
-                          controller: _purchasePriceController,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          textAlign: TextAlign.right,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
-                            constraints: BoxConstraints(maxWidth: 150),
-                            prefix: Text("\$"),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                gapPadding: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Text("Down Payment",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
-                        Spacer(),
-                        TextField(
-                          controller: _downPaymentController,
-                          enabled: false,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          textAlign: TextAlign.right,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
-                            constraints: BoxConstraints(maxWidth: 150),
-                            prefix: Text("\$"),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                gapPadding: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Text("Closing Cost",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
-                        Spacer(),
-                        TextField(
-                          controller: _closingCostController,
-                          enabled: false,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          textAlign: TextAlign.right,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
-                            constraints: BoxConstraints(maxWidth: 150),
-                            prefix: Text("\$"),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                gapPadding: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Text("Exchange Company\nDues",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
-                        Spacer(),
-                        TextField(
-                          controller: _exchangeDuesController,
-                          enabled: false,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          textAlign: TextAlign.right,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
-                            constraints: BoxConstraints(maxWidth: 150),
-                            prefix: Text("\$"),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                gapPadding: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Text("Total Down\nPayment Due",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
-                        Spacer(),
-                        TextField(
-                          controller: _totalDownPaymentController,
-                          enabled: false,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          textAlign: TextAlign.right,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
-                            constraints: BoxConstraints(maxWidth: 150),
-                            prefix: Text("\$"),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                gapPadding: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  Container(
+                    // height should be what is needed to fit the content. It should not be a fixed height.
 
-                // Bottom Area
-                SizedBox(height: 20),
-
-                Container(
-                  height: 100,
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft, // Start position
-                      end: Alignment.bottomRight, // End position
-                      colors: [
-                        Color.fromRGBO(56, 189, 248, 1), // First color
-                        Color.fromRGBO(33, 150, 243, 1),
+                    height: 125,
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft, // Start position
+                        end: Alignment.bottomRight, // End position
+                        colors: [
+                          Color.fromRGBO(56, 189, 248, 1), // First color
+                          Color.fromRGBO(33, 150, 243, 1),
+                        ],
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Amount Financed\n\$${amountFinanced.ceil()}',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            )
+                          ],
+                        ),
+                        Spacer(),
+                        Row(
+                          verticalDirection: VerticalDirection.up,
+                          children: [
+                            Spacer(),
+                            Text(
+                              '\$${monthlyPayment.ceil()}\nMonthly Payment',
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            )
+                          ],
+                        )
                       ],
                     ),
                   ),
-                  child: Row(
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Amount Financed\n\$${amountFinanced.ceil()}',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          )
+                            'Years',
+                            textAlign: TextAlign.left,
+                          ),
+                          SizedBox(height: 4),
+                          MyDropdownWidget(),
                         ],
                       ),
                       Spacer(),
                       Column(
-                        verticalDirection: VerticalDirection.up,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '\$${monthlyPayment.ceil()}\nMonthly Payment',
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          )
+                            'Mortgage Protection',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(),
+                          ),
+                          SizedBox(height: 4),
+                          MyDropdownWidget(),
                         ],
                       )
                     ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Years',
-                          textAlign: TextAlign.left,
-                        ),
-                        SizedBox(height: 4),
-                        MyDropdownWidget(),
-                      ],
-                    ),
-                    Spacer(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Mortgage Protection',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(),
-                        ),
-                        SizedBox(height: 4),
-                        MyDropdownWidget(),
-                      ],
-                    )
-                  ],
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

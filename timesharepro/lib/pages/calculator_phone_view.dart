@@ -68,12 +68,12 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
       return Expanded(
         flex: flex,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6.0),
           child: ElevatedButton(
             onPressed: () => onPressed(buttonText),
             child: Text(buttonText, style: TextStyle(fontSize: 20.0, color: Colors.black)),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue[50],
+              backgroundColor: (buttonText == "=") ? Colors.orange[50] : Colors.blue[50],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
@@ -87,7 +87,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
     return Expanded(
     flex: flex,
     child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(6.0),
       child: ElevatedButton(
         onPressed: () => onPressed(buttonText),
         child: Text(buttonText, style: TextStyle(fontSize: 20.0, color: Colors.black)),
