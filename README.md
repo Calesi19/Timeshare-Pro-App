@@ -26,4 +26,4 @@ To get around iPads not having built-in calculators, we've built a calculator in
 
 ## Running the App
 
-So far, only tested on iOS devices. To run the app, make sure to have the latest version of Flutter installed on your machine. Download the Android SDK and open the Android Simulator, or open the iPhone/iPad Simulator on Mac. ```cd``` into directory, and run ```fliutter run``` to run app. The app has complete functionality without any connections to any server or the internet.
+So far, only tested on iOS devices. To run the app, make sure to have the latest version of Flutter installed on your machine. Download the Android SDK and open the Android Simulator, or open the iPhone/iPad Simulator on Mac. ```cd``` into directory, and run ```flutter run``` to run app. The app has complete functionality without any connections to any server or the internet.
