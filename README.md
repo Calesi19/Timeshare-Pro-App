@@ -1,6 +1,6 @@
 # Timeshare Pro App
 
-![Timeshare Pro](/docs/1.png)
+![Timeshare Pro](/docs/banner.png)
 
 Created for timeshare salesmen. A very simple, clean tool that provides all the features you need and nothing you don't. 
 
