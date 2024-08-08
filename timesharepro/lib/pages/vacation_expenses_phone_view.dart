@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ExpenseCategory {
   final String name;
@@ -50,19 +51,19 @@ class _ExpensePageState extends State<ExpensePage> {
     super.dispose();
   }
 
-
-
-
   double getTotal() {
-   
     double total = 0;
     for (var category in categories) {
       double cost = costs[category.name] ?? 0.0;
       int day = days[category.name] ?? 1;
       total += cost * day;
     }
-
     return total;
+  }
+
+  String formatNumber(double number) {
+    final formatter = NumberFormat("#,##0");
+    return formatter.format(number);
   }
 
   @override
@@ -111,7 +112,7 @@ class _ExpensePageState extends State<ExpensePage> {
                       ),
                       Expanded(
                         child: Text(
-                          '\$${getTotal().toStringAsFixed(0)}',
+                          '\$${formatNumber(getTotal())}',
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
