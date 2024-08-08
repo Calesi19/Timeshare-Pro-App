@@ -69,13 +69,13 @@ class _ExpensePageState extends State<ExpensePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Vacation Expenses',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: GestureDetector(
         onTap: () => {FocusScope.of(context).unfocus()},
@@ -84,11 +84,11 @@ class _ExpensePageState extends State<ExpensePage> {
           child: Column(
             children: [
               Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   width: double.infinity,
                   height: 125,
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     gradient: LinearGradient(
                       begin: Alignment.topLeft, // Start position
@@ -101,7 +101,7 @@ class _ExpensePageState extends State<ExpensePage> {
                   ),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Total Amount',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -114,7 +114,7 @@ class _ExpensePageState extends State<ExpensePage> {
                           '\$${getTotal().toStringAsFixed(0)}',
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 45,
                               fontWeight: FontWeight.bold),
@@ -122,7 +122,7 @@ class _ExpensePageState extends State<ExpensePage> {
                       )
                     ],
                   )),
-              SizedBox(height: 0),
+              const SizedBox(height: 0),
               Expanded(
                 child: ListView.builder(
                   itemCount: categories.length,
@@ -131,9 +131,9 @@ class _ExpensePageState extends State<ExpensePage> {
                     return Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[100],
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                       ),
-                      margin: EdgeInsets.symmetric(vertical: 8),
+                      margin: const EdgeInsets.symmetric(vertical: 8),
                       child: Padding(
                         padding: const EdgeInsets.only(
                             left: 16.0, right: 16, top: 16, bottom: 0),
@@ -149,18 +149,18 @@ class _ExpensePageState extends State<ExpensePage> {
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.left,
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Icon(category.icon,
                                     color: Colors.blue, size: 30),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Row(
                               children: [
                                 Expanded(
                                   child: TextFormField(
                                     controller: costControllers[index],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 30,
                                         fontWeight: FontWeight.bold),
                                     keyboardType: TextInputType.number,
@@ -174,16 +174,16 @@ class _ExpensePageState extends State<ExpensePage> {
                                         labelStyle:
                                             TextStyle(color: Colors.grey[500]),
                                         labelText: 'Cost',
-                                        prefix: Text('\$'),
+                                        prefix: const Text('\$'),
                                         border: InputBorder.none),
                                   ),
                                 ),
-                                if (category.requiresDays) SizedBox(width: 16),
+                                if (category.requiresDays) const SizedBox(width: 16),
                                 if (category.requiresDays)
                                   Expanded(
                                     child: TextFormField(
                                       controller: dayControllers[index],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 30,
                                           fontWeight: FontWeight.bold),
                                       keyboardType: TextInputType.number,
